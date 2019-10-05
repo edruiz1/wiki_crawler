@@ -1,0 +1,5 @@
+name: 'wiki_crawler'
+type: module
+description: 'wikipedia crawler module developed by Eduardo Ruiz for CFR'
+core: 8.x
+package: 'Custom'

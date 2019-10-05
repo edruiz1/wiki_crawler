@@ -1,0 +1,39 @@
+<?php
+
+/**
+ * @file
+ * Contains wiki_crawler.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function wiki_crawler_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the wiki_crawler module.
+    case 'help.page.wiki_crawler':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('wikipedia crawler module developed by Eduardo Ruiz for CFR') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function wiki_crawler_theme($existing, $type, $theme, $path) {
+  return [
+    'wiki_crawler_results' => [
+      'variables' => [
+        'data' => NULL,
+        'form' => NULL,
+        'param' => NULL,
+      ],
+    ],
+  ];
+}

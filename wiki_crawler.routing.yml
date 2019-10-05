@@ -1,0 +1,15 @@
+wiki_crawler.cfr_wiki_form:
+  path: '/wiki'
+  defaults:
+    _form: '\Drupal\wiki_crawler\Form\WikiCrawlerForm'
+    _title: 'Wikipedia Carwler Form'
+  requirements:
+    _access: 'TRUE'
+
+wiki_crawler.wiki_crawler_search_results_controller_content:
+  path: '/wiki/{param}'
+  defaults:
+    _controller: '\Drupal\wiki_crawler\Controller\WikiCrawlerSearchResultsController::content'
+    _title: 'Wikipedia Search Results'
+  requirements:
+    _permission: 'access content'

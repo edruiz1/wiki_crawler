@@ -6,6 +6,7 @@ use Drupal\Core\Controller\ControllerBase;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\wiki_crawler\Services\WikiCrawlerService;
 use Drupal\Core\Form\FormBuilderInterface;
+use Drupal\Core\Messenger\Messenger;
 
 /**
  * Class WikiCrawlerSearchResultsController.
@@ -22,9 +23,14 @@ class WikiCrawlerSearchResultsController extends ControllerBase {
   /**
    * Constructs a new WikiCrawler object.
    */
-  public function __construct(WikiCrawlerService $wikiCrawlerService, FormBuilderInterface $form_builder) {
+  public function __construct(
+    WikiCrawlerService $wikiCrawlerService,
+    FormBuilderInterface $form_builder,
+    Messenger $messenger
+    ) {
     $this->wikiCrawlerService = $wikiCrawlerService;
     $this->formBuilder = $form_builder;
+    $this->messenger = $messenger;
   }
 
   /**
@@ -33,7 +39,8 @@ class WikiCrawlerSearchResultsController extends ControllerBase {
   public static function create(ContainerInterface $container) {
     return new static(
       $container->get('wiki_crawler.crawler_service'),
-      $container->get('form_builder')
+      $container->get('form_builder'),
+      $container->get('messenger')
     );
   }
 
@@ -49,15 +56,15 @@ class WikiCrawlerSearchResultsController extends ControllerBase {
     // Check for errors.
     if (array_key_exists('error', $results)) {
       // Return error message and and redirect to search form.
-      \Drupal::messenger()->addError($results['error']);
+      $this->messenger->addError($results['error']);
       return $this->redirect('wiki_crawler.cfr_wiki_form');
     }
     else {
       // Return search results.
       // Delete all unwanted messages.
-      \Drupal::messenger()->deleteAll();
+      $this->messenger->deleteAll();
       // Add success message.
-      \Drupal::messenger()->addMessage(
+      $this->messenger->addMessage(
         'These are the results for the search on "' . $param . '"'
       );
       // Get the class for the search form.

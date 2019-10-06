@@ -2,6 +2,7 @@
 
 namespace Drupal\wiki_crawler\Services;
 
+use Drupal\Core\Http\ClientFactory;
 use Drupal\Component\Serialization\Json;
 
 /**
@@ -19,8 +20,8 @@ class WikiCrawlerService {
   /**
    * Constructs a new WikiCrawlerService object.
    */
-  public function __construct() {
-    $this->client = \Drupal::service('http_client_factory')->fromOptions([
+  public function __construct(ClientFactory $http_client_factory) {
+    $this->client = $http_client_factory->fromOptions([
       'base_uri' => 'https://en.wikipedia.org/w/',
     ]);
   }
@@ -64,7 +65,7 @@ class WikiCrawlerService {
     else {
       // If there are no results return an error message.
       return [
-        'error' => 'No search resluts were found for the input "' . $param . '",
+        'error' => 'No search results were found for the input "' . $param . '",
                     please check your input and try again.',
       ];
     }

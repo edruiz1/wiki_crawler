@@ -3,7 +3,9 @@
 namespace Drupal\wiki_crawler\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 use Drupal\wiki_crawler\Services\WikiCrawlerService;
+use Drupal\Core\Form\FormBuilderInterface;
 
 /**
  * Class WikiCrawlerSearchResultsController.
@@ -20,8 +22,19 @@ class WikiCrawlerSearchResultsController extends ControllerBase {
   /**
    * Constructs a new WikiCrawler object.
    */
-  public function __construct() {
-    $this->wikiCrawlerService = new WikiCrawlerService();
+  public function __construct(WikiCrawlerService $wikiCrawlerService, FormBuilderInterface $form_builder) {
+    $this->wikiCrawlerService = $wikiCrawlerService;
+    $this->formBuilder = $form_builder;
+  }
+
+  /**
+   * {@inheritdoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static(
+      $container->get('wiki_crawler.crawler_service'),
+      $container->get('form_builder')
+    );
   }
 
   /**

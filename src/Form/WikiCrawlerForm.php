@@ -11,6 +11,13 @@ use Drupal\Core\Form\FormStateInterface;
 class WikiCrawlerForm extends FormBase {
 
   /**
+   * The form builder.
+   *
+   * @var \Drupal\Core\Form\FormBuilderInterface
+   */
+  protected $formBuilder;
+
+  /**
    * {@inheritdoc}
    */
   public function getFormId() {

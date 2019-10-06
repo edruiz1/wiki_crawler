@@ -1,4 +1,4 @@
 services:
-  wiki_crawler.wikipedia:
-    class: Drupal\wiki_crawler\Services\WikiCrawler
-    arguments: []
+  wiki_crawler.crawler_service:
+    class: Drupal\wiki_crawler\Services\WikiCrawlerService
+    arguments: ['@http_client_factory']

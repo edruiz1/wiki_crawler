@@ -1,0 +1,14 @@
+{
+    "name": "eddox/wiki_crawler",
+    "description": "This module shows a form where the user may input a keyword to get search results from wikipedia in a drupal page.",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Eduardo Ruiz",
+            "email": "ruizeduardo8506@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {}
+}

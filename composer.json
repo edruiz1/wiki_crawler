@@ -9,6 +9,12 @@
             "email": "ruizeduardo8506@gmail.com"
         }
     ],
+    "repositories": [
+        {
+            "type": "git",
+            "url": "git@github.com:edruiz1/wiki_crawler.git"
+        }
+    ],
     "minimum-stability": "dev",
     "require": {}
 }

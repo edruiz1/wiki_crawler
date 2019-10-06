@@ -63,7 +63,7 @@ class WikiCrawlerSearchResultsController extends ControllerBase {
       // Get the class for the search form.
       $form_class = '\Drupal\wiki_crawler\Form\WikiCrawlerForm';
       // Build the search form.
-      $form_build['form'] = \Drupal::formBuilder()->getForm($form_class);
+      $form_build['form'] = $this->formBuilder->getForm($form_class);
       // Delete the description from the form.
       unset($form_build['form']['wiki_form_field_description']);
       // Return an array with the information requested.
